@@ -4,29 +4,28 @@
   "description": "BodyTrace checker",
   "main": "index.js",
   "scripts": {
-    "start": "DEBUG=app:* node --harmony-async-await server",
     "lint": "eslint .",
     "tape": "node --harmony-async-await ./node_modules/.bin/tape test/start.js | tap-spec",
     "pretest": "npm run lint",
-    "test": "npm run tape"
+    "test": "npm run tape",
+    "start": "DEBUG=btchecker:* node index"
   },
   "author": "@ndaidong",
   "dependencies": {
     "bellajs": "6.x.x",
+    "chalk": "1.x.x",
+    "clui": "0.x.x",
+    "commander": "2.x.x",
     "debug": "2.x.x",
-    "engine.io": "2.x.x",
-    "kcors": "2.x.x",
-    "koa": "next",
-    "koa-bodyparser": "next",
-    "koa-favicon": "next",
-    "koa-router": "next",
-    "koa-slow": "2.x.x",
-    "node-fetch": "1.x.x"
+    "easy-table": "1.x.x",
+    "mkdirp": "0.x.x",
+    "node-fetch": "1.x.x",
+    "pretty-ms": "2.x.x",
+    "vorpal": "1.x.x"
   },
   "devDependencies": {
     "eslint": "3.x.x",
     "eslint-config-ggc": "1.x.x",
-    "supertest": "2.x.x",
     "tap-spec": "4.x.x",
     "tape": "4.x.x"
   },
