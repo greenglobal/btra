@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{title}</title>
+  </head>
+  <body>
+    <h2>Hello :)</h2>
+    <script src="/engine-io.js"></script>
+    <script>
+      /* eslint-disable */
+      var socket = new eio.Socket('ws://{pusher.host}:{pusher.port}');
+      socket.on('{pusher.event}', (data) => {
+        let o = JSON.parse(data);
+        console.log(o);
+      });
+    </script>
+  </body>
+</html>
