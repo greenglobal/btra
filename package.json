@@ -1,32 +1,47 @@
 {
-  "name": "bodytrace-checker",
-  "version": "0.0.1",
-  "description": "BodyTrace checker",
+  "name": "btra",
+  "version": "0.0.2",
+  "description": "BodyTrace Request/Response Time Analizer",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ndaidong/btra.git"
+  },
+  "homepage": "https://www.npmjs.com/package/btra",
   "main": "index.js",
   "scripts": {
-    "start": "DEBUG=app:* node --harmony-async-await server",
     "lint": "eslint .",
-    "tape": "node --harmony-async-await ./node_modules/.bin/tape test/start.js | tap-spec",
-    "pretest": "npm run lint",
-    "test": "npm run tape"
+    "nsp": "nsp check --output checkstyle",
+    "report": "nyc report --reporter=lcov",
+    "tape": "NODE_ENV=test nyc tape test/start.js | tap-spec",
+    "pretest": "npm run lint && npm run nsp",
+    "test": "npm run tape",
+    "posttest": "npm run report",
+    "coveralls": "npm test && cat ./coverage/lcov.info | coveralls",
+    "start": "node index -h"
+  },
+  "bin": {
+    "btra": "./index.js"
   },
   "author": "@ndaidong",
   "dependencies": {
+    "axios": "0.x.x",
     "bellajs": "6.x.x",
-    "debug": "2.x.x",
-    "engine.io": "2.x.x",
-    "kcors": "2.x.x",
-    "koa": "next",
-    "koa-bodyparser": "next",
-    "koa-favicon": "next",
-    "koa-router": "next",
-    "koa-slow": "2.x.x",
-    "node-fetch": "1.x.x"
+    "chalk": "1.x.x",
+    "cli-table2": "0.x.x",
+    "commander": "2.x.x",
+    "mkdirp": "0.x.x",
+    "node-fetch": "1.x.x",
+    "pretty-ms": "2.x.x",
+    "promise.prototype.finally": "2.x.x",
+    "request": "2.x.x"
   },
   "devDependencies": {
+    "coveralls": "^2.11.16",
     "eslint": "3.x.x",
     "eslint-config-ggc": "1.x.x",
-    "supertest": "2.x.x",
+    "mongodb": "2.x.x",
+    "nsp": "2.x.x",
+    "nyc": "10.x.x",
     "tap-spec": "4.x.x",
     "tape": "4.x.x"
   },
