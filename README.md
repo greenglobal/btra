@@ -12,8 +12,6 @@ BodyTrace Request/Response Time Analizer.
 ```
 sudo npm install -g btra
 
-// or
-yarn --global btra
 ```
 
 ### Usage
@@ -34,6 +32,10 @@ btra request -c <count>
 
 // without specifying -c, it would send just one request
 ```
+
+### Screenshot
+
+![btra's screenshot](http://i.imgur.com/Y1cboCI.png)
 
 # License
 

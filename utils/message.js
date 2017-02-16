@@ -36,10 +36,11 @@ var UNITS = [
 ];
 
 var fs = require('fs');
+var path = require('path');
 var bella = require('bellajs');
 
 var load = (type) => {
-  let file = `./data/samples/${type}.json`;
+  let file = path.resolve(__dirname, `../data/samples/${type}.json`);
   if (fs.existsSync(file)) {
     let s = fs.readFileSync(file, 'utf8');
     return JSON.parse(s);
@@ -69,7 +70,7 @@ var getRamdomMessage = (t = false) => {
 };
 
 var loadUnits = () => {
-  let file = `./data/imei.json`;
+  let file = path.resolve(__dirname, `../data/imei.json`);
   if (fs.existsSync(file)) {
     let s = fs.readFileSync(file, 'utf8');
     UNITS = JSON.parse(s);
