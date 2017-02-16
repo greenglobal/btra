@@ -1,27 +1,27 @@
 {
   "name": "bodytrace-checker",
   "version": "0.0.1",
-  "description": "BodyTrace checker",
+  "description": "BodyTrace response time analyzing",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
     "tape": "node --harmony-async-await ./node_modules/.bin/tape test/start.js | tap-spec",
     "pretest": "npm run lint",
     "test": "npm run tape",
-    "start": "DEBUG=btchecker:* node index"
+    "start": "node index"
   },
   "author": "@ndaidong",
   "dependencies": {
     "bellajs": "6.x.x",
     "chalk": "1.x.x",
     "clui": "0.x.x",
-    "commander": "2.x.x",
+    "commander": "^2.9.0",
     "debug": "2.x.x",
     "easy-table": "1.x.x",
+    "minimist": "1.x.x",
     "mkdirp": "0.x.x",
     "node-fetch": "1.x.x",
-    "pretty-ms": "2.x.x",
-    "vorpal": "1.x.x"
+    "pretty-ms": "2.x.x"
   },
   "devDependencies": {
     "eslint": "3.x.x",

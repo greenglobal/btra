@@ -6,12 +6,22 @@
 
 const fs = require('fs');
 
+const bella = require('bellajs');
+const chalk = require('chalk');
 const mkdirp = require('mkdirp').sync;
+const config = require('../configs');
+
+const log = chalk.italic.white;
+
+const info = (text) => {
+  console.log(log(text));
+};
 
 const {
   storeDir,
-  destinationServer
-} = require('../configs');
+  destinationServerFile,
+  destinationServer: defaultServer
+} = config;
 
 const {
   read,
@@ -20,39 +30,41 @@ const {
 
 
 const getParams = () => {
-  let fpath = `${storeDir}/destination.json`;
-  if (fs.existsSync(fpath)) {
-    return read(fpath);
-  }
-  return destinationServer;
+  let fpath = `${storeDir}/${destinationServerFile}`;
+  return read(fpath) || defaultServer;
 };
 
-const updateParams = (opts) => {
+const updateParams = (opts = {}) => {
 
   let hasChanged = false;
 
   let {
-    target = '',
-    username = '',
+    url = '',
+    email = '',
     password = ''
   } = opts;
 
+  let destinationServer = getParams();
+
   let {
-    target: _target,
-    username: _username,
+    url: _url,
+    email: _email,
     password: _password
   } = destinationServer;
 
-  if (target && target !== _target) {
-    destinationServer.target = target;
+  if (url && bella.isString(url) && url !== _url) {
+    destinationServer.url = String(url);
+    info('New url detected.');
     hasChanged = true;
   }
-  if (username && username !== _username) {
-    destinationServer.username = username;
+  if (email && bella.isString(email) && email !== _email) {
+    destinationServer.email = String(email);
+    info('New email detected.');
     hasChanged = true;
   }
-  if (password && password !== _password) {
-    destinationServer.password = password;
+  if (password && bella.isString(password) && password !== _password) {
+    destinationServer.password = String(password);
+    info('New password detected.');
     hasChanged = true;
   }
 
@@ -61,8 +73,14 @@ const updateParams = (opts) => {
       mkdirp(storeDir);
     }
     let fpath = `${storeDir}/destination.json`;
-    write(fpath, destinationServer);
+    let re = write(fpath, destinationServer);
+    if (re) {
+      info('Saved destination server info.');
+      return true;
+    }
   }
+  info('Nothing changed.');
+  return false;
 };
 
 module.exports = {

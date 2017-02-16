@@ -4,45 +4,47 @@
   @ndaidong
 */
 
-const vorpal = require('vorpal')();
+const commander = require('commander');
 const chalk = require('chalk');
 
 const {
-  updateParams
-} = require('./utils/store');
-
-const {
-  name,
   version
 } = require('./configs');
 
-var setParameters = (args) => {
-  let {options} = args;
-  return updateParams(options);
-};
+const {
+  updateParams
+} = require('./utils');
 
 var sendRequest = (args) => {
   chalk.white(args);
 };
 
-vorpal
-  .command('set', 'Set parameters')
-  .description('To set the required parameters')
-  .option('-t, --target <url>', 'URL to send request to')
-  .option('-u, --username <name>', 'Username to authenticate')
-  .option('-p, --password <pass>', 'Password to authenticate')
-  .action(setParameters);
+commander
+  .version(version)
+  .command('set')
+  .description('Specify target URL and the credentials for authenticating')
+  .option('-u, --url [url]', 'define URL to send request to')
+  .option('-e, --email [email]', 'define email to authenticate')
+  .option('-p, --password [password]', 'define password to authenticate')
+  .action((opts) => {
+    let {
+      url = '', email = '', password = ''
+    } = opts;
+    let o = {
+      url: String(url),
+      email: String(email),
+      password: String(password)
+    };
+    return updateParams(o);
+  });
 
-vorpal
-  .command('send', 'Send requests')
-  .description('To send requests with sample data')
-  .option('-t, --type <msgType>', 'Type of request to send', [
-    'gmt_update', 'reset_device', 'reset_data'
-  ])
-  .option('-n, --number <count>', 'Number of requests to send')
-  .option('-w, --wait <minute>', 'Max time to wait, in minute')
-  .action(sendRequest);
+commander
+  .version(version)
+  .command('request')
+  .description('Send request to target URL with sample data')
+  .option('-c, --count', 'define number of requests to send')
+  .action((count = 1) => {
+    console.log(count);
+  });
 
-vorpal
-  .delimiter('iot$')
-  .show();
+commander.parse(process.argv);
