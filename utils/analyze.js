@@ -64,8 +64,10 @@ var analyze = () => {
     return a.delta < b.delta ? 1 : 0;
   });
 
-  let fastest = Result[total - 1];
-  let slowest = Result[0];
+  let arr = bella.stabilize(Result).msort('delta', -1);
+
+  let fastest = arr.last();
+  let slowest = arr.first();
   let average = prettyMs((fastest.delta + slowest.delta) / 2);
 
   let summary = {
@@ -77,7 +79,7 @@ var analyze = () => {
     average
   };
 
-  return render(summary, Result);
+  return render(summary, arr);
 };
 
 var execute = () => {
@@ -90,7 +92,7 @@ var execute = () => {
     if (Queue.length > 0) {
       setTimeout(execute, 0);
     } else {
-      analyze();
+      setTimeout(analyze, 100);
     }
   });
 };

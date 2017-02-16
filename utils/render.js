@@ -24,11 +24,10 @@ var renderSummary = (data) => {
   t.push({Fastest: data.fastest});
   t.push({Slowest: data.slowest});
   t.push({Average: data.average});
-  header(' Summary:');
   console.log(t.toString());
 };
 
-var renderDetail = (data) => {
+var buildTable = (data) => {
   let t = new Table({
     head: ['IMEI', 'Status', 'Begin', 'End', 'Duration', 'Full URL']
   });
@@ -43,15 +42,42 @@ var renderDetail = (data) => {
     } = row;
     t.push([imei, status === 1 ? 'Passed' : 'Failed', date(start), date(end), duration, url]);
   });
-  header(' View in detail, sort by duration, from slowest to fastest:');
   console.log(t.toString());
+};
+
+var renderDetail = (data) => {
+  return buildTable(data);
+};
+
+var renderTop5Slowest = (arr) => {
+  let data = arr.slice(-5);
+  return buildTable(data);
+};
+
+var renderTop5Fastest = (arr) => {
+  let data = arr.slice(0, 5);
+  return buildTable(data);
 };
 
 var render = (summary, results = []) => {
   line(':'.repeat(150));
+  header(' View in detail, sort by duration, from slowest to fastest:');
   renderDetail(results);
+
+  if (results.length > 10) {
+    line(':'.repeat(150));
+    header(' Top 5 fastest requests:');
+    renderTop5Fastest(results);
+    line(':'.repeat(150));
+    header(' Top 5 slowest requests:');
+    renderTop5Slowest(results);
+  }
+
   line(':'.repeat(150));
+  header(' Summary:');
   renderSummary(summary);
+
+  line(':'.repeat(150));
 };
 
 module.exports = {

@@ -1,14 +1,21 @@
 {
-  "name": "btrtc",
+  "name": "btra",
   "version": "0.0.1",
-  "description": "BodyTrace response time analyzing",
+  "description": "BodyTrace Request/Response Time Analizer",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "tape": "NODE_ENV=test tape test/start.js | tap-spec",
-    "pretest": "npm run lint",
+    "nsp": "nsp check --output checkstyle",
+    "report": "nyc report --reporter=lcov",
+    "tape": "NODE_ENV=test nyc tape test/start.js | tap-spec",
+    "pretest": "npm run lint && npm run nsp",
     "test": "npm run tape",
+    "posttest": "npm run report",
+    "coveralls": "npm test && cat ./coverage/lcov.info | coveralls",
     "start": "node index"
+  },
+  "bin": {
+    "btra": "./index.js"
   },
   "author": "@ndaidong",
   "dependencies": {
@@ -24,9 +31,12 @@
     "request": "2.x.x"
   },
   "devDependencies": {
+    "coveralls": "^2.11.16",
     "eslint": "3.x.x",
     "eslint-config-ggc": "1.x.x",
     "mongodb": "2.x.x",
+    "nsp": "2.x.x",
+    "nyc": "10.x.x",
     "tap-spec": "4.x.x",
     "tape": "4.x.x"
   },

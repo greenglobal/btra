@@ -1,2 +1,2 @@
-# bodytrace-checker
-To check requests sent to BodyTrace server.
+# btra
+BodyTrace Request/Response Time Analizer.

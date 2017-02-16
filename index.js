@@ -15,8 +15,24 @@ const {
 
 const {
   setDSConfig,
-  sendRequest
+  getDSConfig,
+  sendRequest,
+  info
 } = require('./utils');
+
+commander
+  .version(version)
+  .command('get')
+  .description('Get current target URL and the credentials')
+  .action(() => {
+    let o = getDSConfig();
+    for (let k in o) {
+      if (o[k]) {
+        info(`${k}: ${o[k]}`);
+      }
+    }
+    return o;
+  });
 
 commander
   .version(version)
