@@ -1,6 +1,6 @@
 {
   "name": "btra",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "BodyTrace Request/Response Time Analizer",
   "repository": {
     "type": "git",
