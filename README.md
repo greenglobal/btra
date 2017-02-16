@@ -34,7 +34,7 @@ btra request -c <count>
 
 ### Screenshot
 
-![btra's screenshot](http://i.imgur.com/Y1cboCI.png)
+![btra's screenshot](http://i.imgur.com/EyiTj2Z.png)
 
 # License
 

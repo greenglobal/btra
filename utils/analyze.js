@@ -11,6 +11,8 @@ var Queue = [];
 var Result = [];
 var Fails = [];
 
+const MAX_REQUEST_COUNT = 10000;
+
 const {
   time
 } = bella;
@@ -66,8 +68,8 @@ var analyze = () => {
 
   let arr = bella.stabilize(Result).msort('delta', -1);
 
-  let fastest = arr.last();
-  let slowest = arr.first();
+  let fastest = arr.first();
+  let slowest = arr.last();
   let average = prettyMs((fastest.delta + slowest.delta) / 2);
 
   let summary = {
@@ -98,7 +100,7 @@ var execute = () => {
 };
 
 var sendRequest = (count = 1) => {
-  if (isNaN(count) || count < 1 || count > 1000) {
+  if (isNaN(count) || count < 1 || count > MAX_REQUEST_COUNT) {
     info('--count must be a number, in the range of [1, 1000]');
     count = 1;
   }
