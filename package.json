@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "tape": "NODE_ENV=test node --harmony-async-await ./node_modules/.bin/tape test/start.js | tap-spec",
+    "tape": "NODE_ENV=test tape test/start.js | tap-spec",
     "pretest": "npm run lint",
     "test": "npm run tape",
     "start": "node index"
