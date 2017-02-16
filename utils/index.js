@@ -8,13 +8,18 @@ const {
 } = require('./readwrite');
 
 const {
-  updateParams,
-  getParams
+  setDSConfig,
+  getDSConfig
 } = require('./store');
+
+const {
+  sendRequest
+} = require('./analyze');
 
 module.exports = {
   read,
   write,
-  updateParams,
-  getParams
+  setDSConfig,
+  getDSConfig,
+  sendRequest
 };

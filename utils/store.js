@@ -7,15 +7,8 @@
 const fs = require('fs');
 
 const bella = require('bellajs');
-const chalk = require('chalk');
 const mkdirp = require('mkdirp').sync;
 const config = require('../configs');
-
-const log = chalk.italic.white;
-
-const info = (text) => {
-  console.log(log(text));
-};
 
 const {
   storeDir,
@@ -28,13 +21,17 @@ const {
   write
 } = require('./readwrite');
 
+const {
+  info
+} = require('./log');
 
-const getParams = () => {
+
+const getDSConfig = () => {
   let fpath = `${storeDir}/${destinationServerFile}`;
   return read(fpath) || defaultServer;
 };
 
-const updateParams = (opts = {}) => {
+const setDSConfig = (opts = {}) => {
 
   let hasChanged = false;
 
@@ -44,7 +41,7 @@ const updateParams = (opts = {}) => {
     password = ''
   } = opts;
 
-  let destinationServer = getParams();
+  let destinationServer = getDSConfig();
 
   let {
     url: _url,
@@ -72,7 +69,7 @@ const updateParams = (opts = {}) => {
     if (!fs.existsSync(storeDir)) {
       mkdirp(storeDir);
     }
-    let fpath = `${storeDir}/destination.json`;
+    let fpath = `${storeDir}/${destinationServerFile}`;
     let re = write(fpath, destinationServer);
     if (re) {
       info('Saved destination server info.');
@@ -84,6 +81,6 @@ const updateParams = (opts = {}) => {
 };
 
 module.exports = {
-  updateParams,
-  getParams
+  setDSConfig,
+  getDSConfig
 };

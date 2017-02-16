@@ -3,8 +3,6 @@
   utils/readwrite
   @ndaidong
 */
-
-
 var fs = require('fs');
 
 var read = (file) => {

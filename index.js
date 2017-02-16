@@ -4,20 +4,19 @@
   @ndaidong
 */
 
+const promiseFinally = require('promise.prototype.finally');
+promiseFinally.shim();
+
 const commander = require('commander');
-const chalk = require('chalk');
 
 const {
   version
 } = require('./configs');
 
 const {
-  updateParams
+  setDSConfig,
+  sendRequest
 } = require('./utils');
-
-var sendRequest = (args) => {
-  chalk.white(args);
-};
 
 commander
   .version(version)
@@ -26,7 +25,7 @@ commander
   .option('-u, --url [url]', 'define URL to send request to')
   .option('-e, --email [email]', 'define email to authenticate')
   .option('-p, --password [password]', 'define password to authenticate')
-  .action((opts) => {
+  .action((opts = {}) => {
     let {
       url = '', email = '', password = ''
     } = opts;
@@ -35,16 +34,19 @@ commander
       email: String(email),
       password: String(password)
     };
-    return updateParams(o);
+    return setDSConfig(o);
   });
 
 commander
   .version(version)
   .command('request')
   .description('Send request to target URL with sample data')
-  .option('-c, --count', 'define number of requests to send')
-  .action((count = 1) => {
-    console.log(count);
+  .option('-c, --count [count]', 'define number of requests to send')
+  .action((opts = {}) => {
+    let {
+      count = 1
+    } = opts;
+    return sendRequest(count);
   });
 
 commander.parse(process.argv);
