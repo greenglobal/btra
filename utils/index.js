@@ -24,6 +24,16 @@ const {
   line
 } = require('./log');
 
+const {
+  getRandomIMEI
+} = require('./imei');
+
+const {
+  getRamdomMessage,
+  getRandomMsgType,
+  getRandomSafeMsgType
+} = require('./message');
+
 module.exports = {
   read,
   write,
@@ -34,5 +44,9 @@ module.exports = {
   line,
   setDSConfig,
   getDSConfig,
-  sendRequest
+  sendRequest,
+  getRandomIMEI,
+  getRamdomMessage,
+  getRandomMsgType,
+  getRandomSafeMsgType
 };

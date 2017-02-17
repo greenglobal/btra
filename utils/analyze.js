@@ -28,9 +28,12 @@ const {
 } = require('./store');
 
 const {
-  getRamdomMessage,
-  getRandomIMEI
+  getRamdomMessage
 } = require('./message');
+
+const {
+  getRandomIMEI
+} = require('./imei');
 
 const {
   request
@@ -51,7 +54,7 @@ var analyze = () => {
     return item.status === 0;
   });
 
-  Result.map((item) => {
+  let tmp = Result.map((item) => {
     let {
       start,
       end
@@ -62,11 +65,7 @@ var analyze = () => {
     return item;
   });
 
-  Result.sort((a, b) => {
-    return a.delta < b.delta ? 1 : 0;
-  });
-
-  let arr = bella.stabilize(Result).msort('delta', -1);
+  let arr = bella.stabilize(tmp).msort('delta', -1);
 
   let fastest = arr.first();
   let slowest = arr.last();
