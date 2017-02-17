@@ -1,7 +1,7 @@
 # btra
 BodyTrace Request/Response Time Analizer.
 
-[![NPM](https://badge.fury.io/js/btra.svg)](https://badge.fury.io/js/article-parser)
+[![NPM](https://badge.fury.io/js/btra.svg)](https://badge.fury.io/js/btra)
 [![Build Status](https://travis-ci.org/ndaidong/btra.svg?branch=master)](https://travis-ci.org/ndaidong/btra)
 [![Dependency Status](https://gemnasium.com/badges/github.com/ndaidong/btra.svg)](https://gemnasium.com/github.com/ndaidong/btra)
 [![NSP Status](https://nodesecurity.io/orgs/techpush/projects/af77cc48-ab44-46d4-88d6-46b9ffc42ae9/badge)](https://nodesecurity.io/orgs/techpush/projects/af77cc48-ab44-46d4-88d6-46b9ffc42ae9)

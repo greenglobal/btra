@@ -1,6 +1,6 @@
 {
   "name": "btra",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "BodyTrace Request/Response Time Analizer",
   "repository": {
     "type": "git",
@@ -30,16 +30,13 @@
     "cli-table2": "0.x.x",
     "commander": "2.x.x",
     "mkdirp": "0.x.x",
-    "node-fetch": "1.x.x",
     "pretty-ms": "2.x.x",
-    "promise.prototype.finally": "2.x.x",
-    "request": "2.x.x"
+    "promise.prototype.finally": "2.x.x"
   },
   "devDependencies": {
-    "coveralls": "^2.11.16",
+    "coveralls": "2.x.x",
     "eslint": "3.x.x",
     "eslint-config-ggc": "1.x.x",
-    "mongodb": "2.x.x",
     "nsp": "2.x.x",
     "nyc": "10.x.x",
     "tap-spec": "4.x.x",
