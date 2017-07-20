@@ -1,6 +1,8 @@
 var fs = require('fs');
 var path = require('path');
 
+global.Promise = require('promise-wtf');
+
 /**
  * Import specs
  */
