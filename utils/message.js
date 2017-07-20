@@ -26,7 +26,7 @@ var SAFE_TYPES = [
 
 var fs = require('fs');
 var path = require('path');
-var bella = require('bellajs');
+var {stabilize} = require('stabilize.js');
 
 var load = (type) => {
   let file = path.resolve(__dirname, `../data/samples/${type}.json`);
@@ -38,11 +38,11 @@ var load = (type) => {
 };
 
 var getAllMsgTypes = () => {
-  return bella.stabilize(TYPES.concat(SAFE_TYPES));
+  return stabilize(TYPES.concat(SAFE_TYPES));
 };
 
 var getAllSafeMsgTypes = () => {
-  return bella.stabilize(SAFE_TYPES);
+  return stabilize(SAFE_TYPES);
 };
 
 var getRandomMsgType = () => {
