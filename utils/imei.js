@@ -17,7 +17,8 @@ var UNITS = [
 
 var fs = require('fs');
 var path = require('path');
-var bella = require('bellajs');
+
+var {stabilize} = require('stabilize.js');
 
 var loadUnits = () => {
   let file = path.resolve(__dirname, `../data/imei.json`);
@@ -30,7 +31,7 @@ var loadUnits = () => {
 loadUnits();
 
 var getAllUnits = () => {
-  return bella.stabilize(UNITS);
+  return stabilize(UNITS);
 };
 
 var getRandomIMEI = () => {

@@ -4,8 +4,7 @@
   @ndaidong
 */
 
-const promiseFinally = require('promise.prototype.finally');
-promiseFinally.shim();
+global.Promise = require('promise-wtf');
 
 const commander = require('commander');
 
